@@ -57,6 +57,7 @@
 | image    | string     |                                |
 | user_id  | references | null: false, foreign_key: true |
 | group_id | references | null: false, foreign_key: true |
+| created_at | timestamps | null: false                  |
 
 ### Association
 
@@ -72,6 +73,7 @@
 | deadline | datetime   | null: false                    |
 | finished | boolean    | null:false, default: false     |
 | user_id  | references | null: false, foreign_key: true |
+| created_at | timestamps | null: false                  |
 
 ### Association
 
@@ -84,6 +86,7 @@
 | idea    | text       |                                |
 | image   | string     |                                |
 | user_id | references | null: false, foreign_key: true |
+| created_at | timestamps | null: false                 |
 
 ### Association
 
