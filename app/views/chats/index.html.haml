@@ -1,0 +1,27 @@
+.header
+  .header-menu
+    .header-menu--title
+      Think
+    %ul.header-menu__icons
+      %li.header-menu__icons--icon.header-menu__icons--idea
+        =link_to do
+          =fa_icon "lightbulb-o lg"
+      %li.header-menu__icons--icon.header-menu__icons--todo
+        =link_to do
+          =fa_icon "tags lg"
+      %li.header-menu__icons--icon.header-menu__icons--chat
+        =link_to do
+          =fa_icon "comments lg"
+    .header-menu__group-box
+      .header-menu__group-box--head
+        ="username" + "さんの所属しているグループ"
+      %ul.header-menu__group-box__groups
+        %li.header-menu__group-box__groups--group
+          =link_to do
+            ="Group-name1"
+        %li.header-menu__group-box__groups--group
+          =link_to do
+            ="Group-name2"
+        %li.header-menu__group-box__groups--group
+          =link_to do
+            ="Group-name3"
