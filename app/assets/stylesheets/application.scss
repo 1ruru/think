@@ -1,0 +1,204 @@
+@import "./reset";
+@import "font-awesome";
+@import "config/html-init";
+@import "config/variables";
+@import "config/paddings-and-margins";
+@import "config/colors";
+@import "config/sizes";
+@import "mixin/a-unchanged";
+@import "mixin/submit-set";
+@import "mixin/text-set";
+@import "./chats.scss";
+
+
+.header{
+  height: 55px;
+  width: 100vw;
+  padding: 0 100px;
+  box-sizing: border-box;
+  background-color: #56c501;
+  color: white;
+  font-weight: lighter;
+  .header-menu{
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    &__left{
+      height: 55px;
+      display: flex;
+      align-items: center;
+      &--title{
+        font-size: 30px;
+        margin-right: 40px;
+      }
+      &__icons{
+        display: flex;
+        &--icon{
+          @include a-unchanged();
+          margin-right: 15px;
+        }
+      }
+    }
+    &__right{
+      height: 55px;
+      display: flex;
+      align-items: center;
+      &__user-session{
+        display: flex;
+        &--btn{
+          height: 35px;
+          width: 80px;
+          margin-right: 15px;
+          text-align: center;
+          line-height: 35px;
+          border: 2px solid #fff;
+          border-radius: 15px;
+        }
+        &--log-in{
+          @include a-unchanged();
+        }
+        &--sign-up{
+          @include a-unchanged(#56c501);
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.main{
+  height: $height_main;
+  width: 1000px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 330px 40px 630px;
+  grid-template-rows: 3fr 20px 7fr;
+  .user-content{
+    background-color: #fff;
+    border-radius: 20px;
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    align-items: center;
+    padding: 0 30px;
+    &--user-name{
+      font-size: 14px;
+    }
+  }
+  .info-content{
+    background-color: #fff;
+    border-radius: 20px;
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 3/4;
+    padding: 30px;
+    overflow: scroll;
+    &__infomations{
+      height: 162px;
+      @include a-unchanged(#000);
+      &__item{
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #7d7d7d;
+        &--name{
+          font-size: 18px;
+        }
+        &--body{
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+  .main-content{
+    background-color: #fff;
+    border-radius: 20px;
+    display: grid;
+    grid-column: 3/4;
+    grid-row: 1/4;
+    position: relative;
+    .main-body{
+      padding: $pad_main-body-ud $pad_main-lr $pad_main-body-ud;
+      height: $height_main-body;
+      overflow: scroll;
+      .message{
+        // display: inline-block;
+        padding: $pad_main-body-ud $pad-s;
+        border-left: 2px solid #7d7d7d;
+        &__post-info{
+          // display: flex;
+          &--post-user{
+            font-size: 16px;
+            color: $color_main-user-text;
+          }
+          &--post-date{
+            font-size: 9px;
+            color: $color_main-group-members;
+            margin-bottom: 5px;
+          }
+        }
+        &__post-message{
+          font-size: 16px;
+          color: $color_main-user-text;
+        }
+      }
+      .message-me{
+        text-align: right;
+        border: none;
+        border-right: 2px solid #56c501;
+        &__post-message{
+          text-align: right;
+        }
+        &__post-info{
+          text-align: right;
+        }
+      }
+    }
+    .main-form{
+      height: $height_main-form;
+      width: $width_main;
+      background-color: #dddddd;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      position: absolute;
+      bottom: 0; right: 0;
+      .form-body{
+        padding: 10px $pad_main-lr;
+        display: flex;
+        .new-message{
+          display: flex;
+          align-items: center;
+          &__input-box{
+            @include text-set();
+            position: relative;
+            &--text{
+              height: $height_main-form-input;
+              width: $width_main-form-input-text;
+              min-width: 30px;
+              border: none;
+            }
+            &__image-box{
+              position: absolute;
+              top: 0; bottom: 0; right: 0;
+              line-height: $height_main-form-input;
+              padding: 0 $pad-s;
+              background-color: $color_main-body;
+              &--image{
+                cursor: pointer;
+              }
+              &--filesend{
+                display: none;
+              }
+            }
+            &--send{
+              @include submit-set();
+              height: $height_main-form-input;
+              width: $width_main-form-submit;
+              margin-left: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

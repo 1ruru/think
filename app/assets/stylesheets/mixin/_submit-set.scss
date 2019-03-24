@@ -1,0 +1,18 @@
+@mixin submit-set(){
+    & button, & input[type="submit"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      padding: 0;
+      border: none;
+      outline: none;
+      border-bottom-right-radius: 16px;
+      border-top-right-radius: 16px;
+      height: $height_main-form-input;
+      width: 100px;
+      background: $color_main-group-edit;
+      color: #FFF;
+      cursor: pointer;
+      font-weight: lighter;
+  }
+}
