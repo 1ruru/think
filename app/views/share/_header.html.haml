@@ -1,0 +1,28 @@
+.header
+  .header-menu
+    .header-menu__left
+      .header-menu__left--title
+        Dots
+      %ul.header-menu__left__icons
+        %li.header-menu__left__icons--icon.header-menu__left__icons--idea
+          =link_to edit_user_registration_path do
+            =fa_icon "lightbulb-o lg"
+        %li.header-menu__left__icons--icon.header-menu__left__icons--todo
+          =link_to do
+            =fa_icon "tags lg"
+        %li.header-menu__left__icons--icon.header-menu__left__icons--chat
+          =link_to root_path do
+            =fa_icon "comments lg"
+    .header-menu__right
+      %ul.header-menu__right__user-session
+        %li.header-menu__right__user-session--btn.header-menu__right__user-session--log-in
+          -if user_signed_in?
+            =link_to destroy_user_session_path, method: :delete do
+              Log-out
+          -else
+            =link_to new_user_session_path do
+              Log-in
+        -unless user_signed_in?
+          %li.header-menu__right__user-session--btn.header-menu__right__user-session--sign-up
+            =link_to new_user_registration_path do
+              Sign-up

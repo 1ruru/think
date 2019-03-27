@@ -1,0 +1,32 @@
+.messages
+  -day_print_flag = DateTime.new(2000)
+  - chats.each do |chat|
+    -if (day_print_flag.year != chat.created_at.year) || (day_print_flag.yday != chat.created_at.yday)
+      %p.messages--date
+        =chat.created_at.strftime("--------------------%Y/%m/%d(%a)--------------------")
+        -day_print_flag = chat.created_at
+    %div{class:"message#{' message-me' if chat.user_id == current_user.id}"}
+      .message__post-info
+        %p.message__post-info--post-user
+          =chat.user.name
+        %p.message__post-info--post-date
+          =chat.created_at.strftime("%H:%M:%S")
+
+        -if chat.user_id == current_user.id
+          -unless chat.removed
+            %p.message__post-message
+              -if chat.chat.present?
+                = chat.chat
+              = image_tag chat.image.url if chat.image.present?
+            =link_to group_chat_path(chat.group, chat), method: :patch do
+              =fa_icon "trash"
+          -else
+            %p.message__post-removed
+              メッセージは削除されました
+            =link_to group_chat_path(chat.group, chat), method: :patch do
+              =fa_icon "rotate-left"
+        -else
+          %p.message__post-message
+            -if chat.chat.present?
+              = chat.chat
+            = image_tag chat.image.url if chat.image.present?

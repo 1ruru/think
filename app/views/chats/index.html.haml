@@ -1,93 +1,55 @@
-.header
-  .header-menu
-    .header-menu__left
-      .header-menu__left--title
-        Think
-      %ul.header-menu__left__icons
-        %li.header-menu__left__icons--icon.header-menu__left__icons--idea
-          =link_to do
-            =fa_icon "lightbulb-o lg"
-        %li.header-menu__left__icons--icon.header-menu__left__icons--todo
-          =link_to do
-            =fa_icon "tags lg"
-        %li.header-menu__left__icons--icon.header-menu__left__icons--chat
-          =link_to do
-            =fa_icon "comments lg"
-    .header-menu__right
-      %ul.header-menu__right__user-session
-        %li.header-menu__right__user-session--btn.header-menu__right__user-session--log-in
-          -if user_signed_in?
-            =link_to destroy_user_session_path, method: :delete do
-              Log-out
-          -else
-            =link_to new_user_session_path do
-              Log-in
-        %li.header-menu__right__user-session--btn.header-menu__right__user-session--sign-up
-          =link_to do
-            Sign-up
+=render "share/header"
 
 .main
-  .user-content
-    %p.user-content--user-name
-      user-name  さん
-  .info-content
-    .info-content__infomations
-      .info-content__infomations__item
-        =link_to do
-          %p.info-content__infomations__item--name
-            松村上久郎 -bande dessinée-
-          %p.info-content__infomations__item--body
-            画像が送信されています。
-      -# -for num in 1..5 do
-      -#   .info-content__infomations__item
-      -#     =link_to do
-      -#       %p.info-content__infomations__item--name
-      -#         松村上久郎 -bande dessinée-
-      -#       %p.info-content__infomations__item--body
-      -#         画像が送信されています。
+  =render "share/side-contents"
   .main-content
     .main-body
-      .mesages
-        .message
-          .message__post-info
-            %p.message__post-info--post-user
-              user-another
-            %p.message__post-info--post-date
-              2019/03/24(Sun) 11:11:11
-          %p.message__post-message
-            Hello!
-        .message.message-me
-          .message__post-info.message-me__post-info
-            %p.message__post-info--post-user.message-me__post-info--post-user
-              user-me
-            %p.message__post-info--post-date.message-me__post-info--post-date
-              2019/03/24(Sun) 11:11:11
-          %p.message__post-message.message-me__post-message
-            Hi!
-        .message
-          .message__post-info
-            %p.message__post-info--post-user
-              user-another
-            %p.message__post-info--post-date
-              2019/03/24(Sun) 11:11:11
-          %p.message__post-message
-            How are you?
-        .message.message-me
-          .message__post-info.message-me__post-info
-            %p.message__post-info--post-user.message-me__post-info--post-user
-              user-me
-            %p.message__post-info--post-date.message-me__post-info--post-date
-              2019/03/24(Sun) 11:11:11
-          %p.message__post-message.message-me__post-message
-            I'm so so :)
+      =render partial: "messages", locals: {chats: @chats}
+      -# .messages
+      -#   -day_print_flag ||= DateTime.new(2000)
+      -#   - @chats.each do |chat|
+      -#     -if (day_print_flag.year != chat.created_at.year) || (day_print_flag.yday != chat.created_at.yday)
+      -#       %p.messages--date
+      -#         =chat.created_at.strftime("--------------------%Y/%m/%d(%a)--------------------")
+      -#         -day_print_flag = chat.created_at
+      -#     -if chat.user_id == current_user.id
+      -#       .message.message-me
+      -#         .message__post-info.message-me__post-info
+      -#           %p.message__post-info--post-user.message-me__post-info--post-user
+      -#             =chat.user.name
+      -#           %p.message__post-info--post-date.message-me__post-info--post-date
+      -#             =chat.created_at.strftime("%H:%M:%S")
+      -#           -unless chat.removed
+      -#             %p.message__post-message.message-me__post-message
+      -#               -if chat.chat.present?
+      -#                 = chat.chat
+      -#               = image_tag chat.image.url if chat.image.present?
+      -#             =link_to group_chat_path(chat.group, chat), method: :patch do
+      -#               =fa_icon "trash"
+      -#           -else
+      -#             %p.message__post-message.message-me__post-message
+      -#               メッセージは削除されました
+      -#             =link_to group_chat_path(chat.group, chat), method: :patch do
+      -#               =fa_icon "rotate-left"
+      -#     -else
+      -#       .message
+      -#         .message__post-info
+      -#           %p.message__post-info--post-user
+      -#             =chat.user.name
+      -#           %p.message__post-info--post-date
+      -#             =chat.created_at.strftime("%H:%M:%S")
+      -#           %p.message__post-message
+      -#             -if chat.chat.present?
+      -#               = chat.chat
+      -#             = image_tag chat.image.url if chat.image.present?
     .main-form
-      .form-body
+      = form_for [@group, @chat], html:{class:"form-body"} do |f|
         .new-message
           .new-message__input-box
-            %input{ type: "text", class: "new-message__input-box--text", placeholder: 'type a message'}
+            = f.text_field :chat, class: "new-message__input-box--text", placeholder: 'type a message'
             .new-message__input-box__image-box
               %label.image
                 = fa_icon 'fa-image', class: 'fa fa-image new-message__input-box__image-box--image'
-                %input{type:"file" ,class: 'new-message__input-box__image-box--filesend'}
+                = f.file_field :image, class: 'new-message__input-box__image-box--filesend'
           .new-message__input-box--send
-            = submit_tag 'Send'
+            = f.submit 'Send'

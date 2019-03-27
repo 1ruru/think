@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_112519) do
+ActiveRecord::Schema.define(version: 2019_03_26_123536) do
 
   create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "chat"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_112519) do
     t.bigint "group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "removed", default: false, null: false
     t.index ["group_id"], name: "index_chats_on_group_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_112519) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avator"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

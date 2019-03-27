@@ -1,0 +1,29 @@
+.login-clean
+  = form_for group do |f|
+    %h2
+      = group_name
+    .illustration
+      -case controller.action_name
+      -when "new"
+        =fa_icon "plus-circle"
+      -when "edit"
+        =fa_icon "gear"
+    -if group.errors.any?
+      .alert.alert-danger
+        %h2= "#{group.errors.full_messages.count}件のエラーが発生しました。"
+        %ul
+          - group.errors.full_messages.each do |message|
+            %li= message
+    .form-group
+      = f.label "Group name"
+      %br/
+      = f.text_field :name, autofocus: true, class: "form-control", placeholder: "Group-name"
+    .form-group
+      = f.label "Select member"
+      %br/
+      = f.collection_check_boxes :user_ids, User.all, :id, :name
+    .form-group
+      = f.submit "Create group", class: "btn btn-primary btn-block"
+    -if controller.action_name == "edit"
+      .form-group
+        =link_to "Destroy group", group_path(@group), method: :delete, data: {confirm: "本当に削除しますか？"} ,class: "btn btn-primary btn-block"

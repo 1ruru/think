@@ -1,0 +1,21 @@
+.user-content
+  %p.user-content--user-name
+    =current_user.name + "さん"
+.info-content
+  .info-content__infomations
+    -current_user.groups.each do |group|
+      .info-content__infomations__item
+        =link_to group_chats_path(group)do
+          %p.info-content__infomations__item--name
+            =group.name
+          %p.info-content__infomations__item--body
+            画像が送信されています。
+  .info-content__menu-box
+    %ul.info-content__menu-box__menu
+      %li.info-content__menu-box__menu--add.info-content__menu-box__menu--item
+        =link_to new_group_path do
+          =fa_icon "plus lg"
+      -if params[:group_id]
+        %li.info-content__menu-box__menu--edit.info-content__menu-box__menu--item
+          =link_to edit_group_path(params[:group_id]) do
+            =fa_icon "gear lg"

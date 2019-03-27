@@ -1,6 +1,7 @@
+@import "bootstrap";
 @import "./reset";
+@import "ionicons";
 @import "font-awesome";
-@import "config/html-init";
 @import "config/variables";
 @import "config/paddings-and-margins";
 @import "config/colors";
@@ -9,7 +10,23 @@
 @import "mixin/submit-set";
 @import "mixin/text-set";
 @import "./chats.scss";
+@import "./users.scss";
 
+body{
+  height: 100vh;
+  background: url('IMG_4505.jpg') fixed;
+    background-size: cover;
+  
+  .test{
+    height: 100%;
+    background-color: rgba(#fff, 0.5);
+    .flash{
+      position: fixed;
+      bottom: 0;left: 0;
+      z-index: 9999;
+    }
+  }
+}
 
 .header{
   height: 55px;
@@ -35,6 +52,9 @@
         display: flex;
         &--icon{
           @include a-unchanged();
+          & a:hover{
+            color: yellow;
+          }
           margin-right: 15px;
         }
       }
@@ -74,7 +94,7 @@
   grid-template-columns: 330px 40px 630px;
   grid-template-rows: 3fr 20px 7fr;
   .user-content{
-    background-color: #fff;
+    background-color: rgba(#f5f5f5, 0.8);
     border-radius: 20px;
     display: grid;
     grid-column: 1/2;
@@ -86,15 +106,16 @@
     }
   }
   .info-content{
-    background-color: #fff;
+    background-color: rgba(#f5f5f5, 0.8);
     border-radius: 20px;
     display: grid;
     grid-column: 1/2;
     grid-row: 3/4;
     padding: 30px;
-    overflow: scroll;
+    position: relative;
     &__infomations{
-      height: 162px;
+      height: calc(100% - 10px);
+      overflow: scroll;
       @include a-unchanged(#000);
       &__item{
         padding-bottom: 10px;
@@ -109,9 +130,21 @@
         }
       }
     }
+    &__menu-box{
+      height: 30px;
+      position: absolute;
+      bottom:0;right:0;
+      &__menu{
+        display:flex;
+        margin-right: 16px;
+        &--item{
+          margin-right: 6px;
+        }
+      }
+    }
   }
   .main-content{
-    background-color: #fff;
+    background-color: rgba(#f5f5f5, 0.8);
     border-radius: 20px;
     display: grid;
     grid-column: 3/4;
@@ -121,36 +154,47 @@
       padding: $pad_main-body-ud $pad_main-lr $pad_main-body-ud;
       height: $height_main-body;
       overflow: scroll;
-      .message{
-        // display: inline-block;
-        padding: $pad_main-body-ud $pad-s;
-        border-left: 2px solid #7d7d7d;
-        &__post-info{
-          // display: flex;
-          &--post-user{
+      .messages{
+        &--date{
+          font-size: 12px;
+          text-align: center;
+        }
+        .message{
+          // display: inline-block;
+          padding: $pad_main-body-ud $pad-s;
+          border-left: 2px solid #7d7d7d;
+          &__post-info{
+            // display: flex;
+            &--post-user{
+              font-size: 16px;
+              color: $color_main-user-text;
+            }
+            &--post-date{
+              font-size: 9px;
+              color: $color_main-group-members;
+              margin-bottom: 5px;
+            }
+          }
+          &__post-message{
             font-size: 16px;
             color: $color_main-user-text;
           }
-          &--post-date{
-            font-size: 9px;
-            color: $color_main-group-members;
-            margin-bottom: 5px;
+          &__post-removed{
+            font-size: 14px;
+            font-style: italic;
+            color: #7d7d7d;
           }
         }
-        &__post-message{
-          font-size: 16px;
-          color: $color_main-user-text;
-        }
-      }
-      .message-me{
-        text-align: right;
-        border: none;
-        border-right: 2px solid #56c501;
-        &__post-message{
+        .message-me{
           text-align: right;
-        }
-        &__post-info{
-          text-align: right;
+          border: none;
+          border-right: 2px solid #56c501;
+          // &__post-message{
+          //   text-align: right;
+          // }
+          // &__post-info{
+          //   text-align: right;
+          // }
         }
       }
     }
