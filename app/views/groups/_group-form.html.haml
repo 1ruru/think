@@ -19,6 +19,10 @@
       %br/
       = f.text_field :name, autofocus: true, class: "form-control", placeholder: "Group-name"
     .form-group
+      %label Search group
+      %br/
+      %input(type="text"){class: "form-control", placeholder: "Group-name", id:"search-group", name:"keyword"}/
+    .form-group
       = f.label "Select member"
       %br/
       = f.collection_check_boxes :user_ids, User.all, :id, :name

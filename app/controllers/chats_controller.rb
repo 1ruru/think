@@ -9,7 +9,10 @@ class ChatsController < ApplicationController
   def create
     @chat = @group.chats.new(chat_params)
     if @chat.save
-      redirect_to group_chats_path(@group), success:"メッセージを送信しました！"
+      respond_to do |format|
+        format.html {redirect_to group_chats_path(@group), success:"メッセージを送信しました！"}
+        format.json
+      end
     else
       @chats = @group.chats.includes(:user)
       flash.now[:danger] = "メッセージを入力してください"
