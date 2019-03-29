@@ -32,7 +32,7 @@ $(function(){
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html)
-      $('.new-message__input-box--text').val('')
+      $('.new-message__input-box--text').val('');
       $('.main-body').animate({scrollTop: $('.main-body')[0].scrollHeight}, 1000);
       $('.btn-submit').prop("disabled",false);
     })

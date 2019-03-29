@@ -27,7 +27,11 @@
       %br/
       = f.collection_check_boxes :user_ids, User.all, :id, :name
     .form-group
-      = f.submit "Create group", class: "btn btn-primary btn-block"
+      -case controller.action_name
+      -when "new"
+        = f.submit "Create group", class: "btn btn-primary btn-block"
+      -when "edit"
+        = f.submit "Edit group", class: "btn btn-primary btn-block"
     -if controller.action_name == "edit"
       .form-group
         =link_to "Destroy group", group_path(@group), method: :delete, data: {confirm: "本当に削除しますか？"} ,class: "btn btn-primary btn-block"
