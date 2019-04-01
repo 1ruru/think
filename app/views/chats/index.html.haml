@@ -5,43 +5,6 @@
   .main-content
     .main-body
       =render partial: "messages", locals: {chats: @chats}
-      -# .messages
-      -#   -day_print_flag ||= DateTime.new(2000)
-      -#   - @chats.each do |chat|
-      -#     -if (day_print_flag.year != chat.created_at.year) || (day_print_flag.yday != chat.created_at.yday)
-      -#       %p.messages--date
-      -#         =chat.created_at.strftime("--------------------%Y/%m/%d(%a)--------------------")
-      -#         -day_print_flag = chat.created_at
-      -#     -if chat.user_id == current_user.id
-      -#       .message.message-me
-      -#         .message__post-info.message-me__post-info
-      -#           %p.message__post-info--post-user.message-me__post-info--post-user
-      -#             =chat.user.name
-      -#           %p.message__post-info--post-date.message-me__post-info--post-date
-      -#             =chat.created_at.strftime("%H:%M:%S")
-      -#           -unless chat.removed
-      -#             %p.message__post-message.message-me__post-message
-      -#               -if chat.chat.present?
-      -#                 = chat.chat
-      -#               = image_tag chat.image.url if chat.image.present?
-      -#             =link_to group_chat_path(chat.group, chat), method: :patch do
-      -#               =fa_icon "trash"
-      -#           -else
-      -#             %p.message__post-message.message-me__post-message
-      -#               メッセージは削除されました
-      -#             =link_to group_chat_path(chat.group, chat), method: :patch do
-      -#               =fa_icon "rotate-left"
-      -#     -else
-      -#       .message
-      -#         .message__post-info
-      -#           %p.message__post-info--post-user
-      -#             =chat.user.name
-      -#           %p.message__post-info--post-date
-      -#             =chat.created_at.strftime("%H:%M:%S")
-      -#           %p.message__post-message
-      -#             -if chat.chat.present?
-      -#               = chat.chat
-      -#             = image_tag chat.image.url if chat.image.present?
     .main-form
       = form_for [@group, @chat], html:{class:"form-body"} do |f|
         .new-message
